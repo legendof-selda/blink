@@ -26,7 +26,8 @@ def load_config(path: pathlib.Path, ext: str = None, **kwargs):
         elif ext == ".xml":
             config = xmltodict.parse(config_file, **kwargs)
         elif ext == ".ini":
-            ini_config = InitDict().read(config_file)
+            ini_config = InitDict()
+            ini_config.read_file(config_file)
             config = ini_config.to_dict()
         elif ext == ".toml":
             config = toml.load(config_file)
