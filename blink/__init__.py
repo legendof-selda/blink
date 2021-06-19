@@ -6,12 +6,10 @@ from typing import Union
 class Config(object):
     def __init__(self, config_path: Union[pathlib.Path, str], **kwargs):
         self.config_path = pathlib.Path(config_path)
-        print(self.config_path.absolute())
         self._modified = self.config_path.stat().st_mtime
         self._config = load_config(self.config_path)
     
     def _check(self):
-        print(self.config_path.stat().st_mtime)
         if self.config_path.stat().st_mtime != self._modified:
             self._reload()
 
