@@ -127,3 +127,13 @@ def export(path: pathlib.Path, config: dict, ext: str = None, **kwargs):
         else:
             print("Currently supports ini, json, toml, xml, yaml config files only")
             raise ValueError("File ext not supported!")
+
+def pretty(d, indent=0, spaces=4):
+    print("{")
+    for key, value in d.items():
+        print(' ' * (spaces * (indent + 1)) + str(key) + ": ", end="")
+        if isinstance(value, dict):
+            pretty(value, indent+1, spaces)
+        else:
+            print(str(value))
+    print(' ' * (spaces * indent) + "}")

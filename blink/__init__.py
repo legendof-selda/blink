@@ -1,5 +1,5 @@
 import pathlib
-from .utils import load_config, dumps, export
+from .utils import load_config, dumps, export, pretty
 from typing import Union
 import traceback
 
@@ -68,3 +68,6 @@ class Config(object):
     def __str__(self) -> str:
         self._check()
         return str(self._config)
+    
+    def pretty(self):
+        pretty(self._config)
