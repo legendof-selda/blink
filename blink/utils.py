@@ -61,7 +61,9 @@ def load_config(path: pathlib.Path, ext: str = None, **kwargs) -> dict:
             config = yaml.load(config_file, **kwargs)
         elif ext == ".xml":
             xml_input = config_file.read()
-            config = xmltodict.parse(xml_input, **kwargs)
+            if "dict_constructor" in kwargs:
+                kwargs.pop("dict_constructor")
+            config = xmltodict.parse(xml_input, dict_constructor=dict, **kwargs)
         elif ext in [".ini", ".cfg"]:
             ini_config = ConfigParserExt()
             ini_config.read_file(config_file)
@@ -109,7 +111,7 @@ def export(path: pathlib.Path, config: dict, ext: str = None, **kwargs):
         if ext == ".json":
             json.dump(config, config_file, **kwargs)
         elif ext in [".yml", ".yaml"]:
-            _ = yaml.safe_dump(config, config_file, **kwargs)
+            _ = yaml.dump(config, config_file, **kwargs)
         elif ext == ".xml":
             if len(config.keys()) == 1:
                 config_str = xmltodict.unparse(config, **kwargs)
