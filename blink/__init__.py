@@ -47,3 +47,6 @@ class Config(object):
     def keys(self):
         self._check()
         return self._config.keys()
+
+    def has_key(self, key):
+        return key in self.keys()
