@@ -55,12 +55,14 @@ class Config(object):
         return self.has_key(key)
     
     def __iter__(self):
+        self._check()
         return self._config.__iter__()
     
     def iterkeys(self):
         return self.__iter__()
     
     def items(self):
+        self._check()
         return self._config.items()
     
     def __str__(self) -> str:
