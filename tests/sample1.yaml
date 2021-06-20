@@ -1,0 +1,14 @@
+key1:
+  subkey1: Hi
+  subkey2:
+  - 1
+  - 2
+  - 3
+key2:
+  subkey3: 1
+  subkey4:
+    subsubkey1: 1
+    subsubkey2:
+    - 4
+    - 5
+    - 6

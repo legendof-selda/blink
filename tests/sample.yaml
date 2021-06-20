@@ -1,0 +1,61 @@
+BACKUP_SERVERS:
+  bcmsbackup: '0'
+  cdrbackup: '0'
+  customftp: '1'
+  customftpdir: home/mvuser/backup
+  customftppwd: jerry
+  customftpuname: tom
+  fileserver: '0'
+  primaryip: 192.168.0.13
+  requestbackup: '0'
+  requestupdates: '0'
+  retaindays: '7.0'
+  secondaryip: 192.168.0.10
+  updateinterval: '2'
+  useprimarysvr: '0'
+  usesecondarysvr: '0'
+FTP:
+  enablesu: '1'
+  ftp_timeout: '5'
+  ftpdataport: '20'
+  ftpdir: /opt/ecs/mvuser/MV_IPTel/data/FTPdata
+  ftpport: '21'
+  runftp: '1'
+  supassword: Avaya
+  suusername: mvuser
+FTPS:
+  ftpdataport: '889'
+  ftpport: '990'
+  runftps: '0'
+HTTP:
+  httpdir: /opt/ecs/mvuser/MV_IPTel/data/HTTPdata
+  httpport: '81'
+  runhttp: '1'
+HTTPS:
+  certfile: /opt/ecs/mvuser/MV_IPTel/certs/IPTelcert.pem
+  clientauth: '0'
+  httpsdir: /opt/ecs/mvuser/MV_IPTel/data/HTTPSdata
+  httpsport: '411'
+  iptel: '0'
+  keyfile: /opt/ecs/mvuser/MV_IPTel/certs/IPTelkey.pem
+  proxyaddr: simon.avaya.com
+  proxyport: '9000'
+  runhttps: '0'
+  sslv2: '0'
+  sslv3: '0'
+  tlsv1: '1'
+  useproxy: '0'
+SNMP: {}
+Settings:
+  archive: '1'
+  detailedlog: '1'
+  logfile: /opt/ecs/mvuser/MV_IPTel/log/MV_IPTel.log
+  runstatus: '1'
+  servername: Unknown
+  statusport: '6090'
+  statusrefresh: '10'
+  version: 0.9 Build 4 Created July 11 2004 14:00
+TFTP:
+  runtrivialftp: '1'
+  tftpdir: /opt/ecs/mvuser/MV_IPTel/data/TFTPdata
+  trivialftpport: '69'

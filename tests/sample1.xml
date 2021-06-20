@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<key1>
+		<subkey1>Hi</subkey1>
+		<subkey2>1</subkey2>
+		<subkey2>2</subkey2>
+		<subkey2>3</subkey2>
+	</key1>
+	<key2>
+		<subkey3>1</subkey3>
+		<subkey4>
+			<subsubkey1>1</subsubkey1>
+			<subsubkey2>4</subsubkey2>
+			<subsubkey2>5</subsubkey2>
+			<subsubkey2>6</subsubkey2>
+		</subkey4>
+	</key2>
+</config>
