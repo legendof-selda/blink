@@ -8,7 +8,7 @@ class Config(object):
     def __init__(self, config_path: Union[pathlib.Path, str], **kwargs):
         self.config_path = pathlib.Path(config_path)
         if not self.config_path.is_file():
-            if kwargs["create_file_if_not_exists"] is False:
+            if "create_file_if_not_exists" in kwargs and kwargs["create_file_if_not_exists"] is True:
                 self.config_path.touch()
                 self._config = {}
             else:
@@ -50,3 +50,19 @@ class Config(object):
 
     def has_key(self, key):
         return key in self.keys()
+    
+    def __contains__(self, key):
+        return self.has_key(key)
+    
+    def __iter__(self):
+        return self._config.__iter__()
+    
+    def iterkeys(self):
+        return self.__iter__()
+    
+    def items(self):
+        return self._config.items()
+    
+    def __str__(self) -> str:
+        self._check()
+        return str(self._config)

@@ -20,5 +20,6 @@ config = Config("config.json")
 and use it like a normal dictionary!
 
 ```python
-config["key1"]
+val = config["key1"]["subkey1"]
+print(config["number"])
 ```
