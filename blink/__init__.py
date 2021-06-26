@@ -69,5 +69,9 @@ class Config(object):
         self._check()
         return str(self._config)
 
+    def __repr__(self):
+        self._check()
+        return repr(self._config)
+
     def pretty(self):
         pretty(self._config)
