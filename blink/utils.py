@@ -14,7 +14,7 @@ class ConfigParserExt(ConfigParser):
             d[k] = dict(self._defaults, **d[k])
             d[k].pop("__name__", None)
         return d
-    
+
     def dumps(self, space_around_delimiters=True) -> str:
         """Return an .ini-format representation of the configuration state.
 
@@ -27,11 +27,9 @@ class ConfigParserExt(ConfigParser):
         else:
             d = self._delimiters[0]
         if self._defaults:
-            output += self._dumps_section(self.default_section,
-                                    self._defaults.items(), d)
+            output += self._dumps_section(self.default_section, self._defaults.items(), d)
         for section in self._sections:
-            output += self._dumps_section(section,
-                                self._sections[section].items(), d)
+            output += self._dumps_section(section, self._sections[section].items(), d)
         return output
 
     def _dumps_section(self, section_name, section_items, delimiter) -> str:
@@ -133,7 +131,7 @@ def pretty(d, indent=0, spaces=4):
     for key, value in d.items():
         print(' ' * (spaces * (indent + 1)) + str(key) + ": ", end="")
         if isinstance(value, dict):
-            pretty(value, indent+1, spaces)
+            pretty(value, indent + 1, spaces)
         else:
             print(str(value))
     print(' ' * (spaces * indent) + "}")

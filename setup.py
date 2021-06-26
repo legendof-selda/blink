@@ -4,6 +4,7 @@ from _version import current_version, get_remote_url
 
 
 long_description = pypandoc.convert_file("README.md", 'rst')
+long_description = long_description.replace(":eye:blink", "blink")
 
 setuptools.setup(
     name = "blink-config",
