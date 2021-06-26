@@ -21,5 +21,11 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages = setuptools.find_packages(exclude=('tests',)),
-    python_requires = ">=3.6"
+    python_requires = ">=3.6",
+    extras_require = {
+        "ini": ["configparser"],
+        "toml": ["toml"],
+        "xml": ["xmltodict==0.12.0"],
+        "yaml": ["PyYAML"]
+    }
 )

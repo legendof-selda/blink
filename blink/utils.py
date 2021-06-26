@@ -1,50 +1,63 @@
-import json
-import yaml
-import toml
 import pathlib
-from configparser import ConfigParser
-import xmltodict
 from typing import IO
+try:
+    import json
+except ImportError:
+    pass
+try:
+    import yaml
+except ImportError:
+    pass
+try:
+    import toml
+except ImportError:
+    pass
+try:
+    import xmltodict
+except ImportError:
+    pass
+try:
+    from configparser import ConfigParser
 
+    class ConfigParserExt(ConfigParser):
+        def to_dict(self) -> dict:
+            d = dict(self._sections)
+            for k in d:
+                d[k] = dict(self._defaults, **d[k])
+                d[k].pop("__name__", None)
+            return d
 
-class ConfigParserExt(ConfigParser):
-    def to_dict(self) -> dict:
-        d = dict(self._sections)
-        for k in d:
-            d[k] = dict(self._defaults, **d[k])
-            d[k].pop("__name__", None)
-        return d
+        def dumps(self, space_around_delimiters=True) -> str:
+            """Return an .ini-format representation of the configuration state.
 
-    def dumps(self, space_around_delimiters=True) -> str:
-        """Return an .ini-format representation of the configuration state.
-
-        If `space_around_delimiters' is True (the default), delimiters
-        between keys and values are surrounded by spaces.
-        """
-        output = ""
-        if space_around_delimiters:
-            d = " {} ".format(self._delimiters[0])
-        else:
-            d = self._delimiters[0]
-        if self._defaults:
-            output += self._dumps_section(self.default_section, self._defaults.items(), d)
-        for section in self._sections:
-            output += self._dumps_section(section, self._sections[section].items(), d)
-        return output
-
-    def _dumps_section(self, section_name, section_items, delimiter) -> str:
-        """Dump string a single section"""
-        output = "[{}]\n".format(section_name)
-        for key, value in section_items:
-            value = self._interpolation.before_write(self, section_name, key,
-                                                     value)
-            if value is not None or not self._allow_no_value:
-                value = delimiter + str(value).replace('\n', '\n\t')
+            If `space_around_delimiters' is True (the default), delimiters
+            between keys and values are surrounded by spaces.
+            """
+            output = ""
+            if space_around_delimiters:
+                d = " {} ".format(self._delimiters[0])
             else:
-                value = ""
-            output += "{}{}\n".format(key, value)
-        output += "\n"
-        return output
+                d = self._delimiters[0]
+            if self._defaults:
+                output += self._dumps_section(self.default_section, self._defaults.items(), d)
+            for section in self._sections:
+                output += self._dumps_section(section, self._sections[section].items(), d)
+            return output
+
+        def _dumps_section(self, section_name, section_items, delimiter) -> str:
+            """Dump string a single section"""
+            output = "[{}]\n".format(section_name)
+            for key, value in section_items:
+                value = self._interpolation.before_write(self, section_name, key, value)
+                if value is not None or not self._allow_no_value:
+                    value = delimiter + str(value).replace('\n', '\n\t')
+                else:
+                    value = ""
+                output += "{}{}\n".format(key, value)
+            output += "\n"
+            return output
+except ImportError:
+    pass
 
 
 def load_config(path: pathlib.Path, ext: str = None, **kwargs) -> dict:
